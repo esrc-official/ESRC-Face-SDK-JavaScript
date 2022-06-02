@@ -1,0 +1,25 @@
+{
+  "name": "@esrc/face",
+  "version": "0.0.7",
+  "description": "ESRC Face JavaScript SDK",
+  "main": "./dist/esrc.js",
+  "scripts": {
+    "dev": "./node_modules/.bin/webpack --mode=development",
+    "build": "./node_modules/.bin/webpack --mode=production",
+    "start": "node app.js"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.17.10",
+    "@babel/core": "^7.18.0",
+    "@babel/preset-env": "^7.18.0",
+    "babel-loader": "^8.2.5",
+    "express": "^4.18.1",
+    "webpack": "^5.72.1",
+    "webpack-cli": "^4.9.2"
+  },
+  "dependencies": {
+    "@esrc/opencv.js": "^4.5.1",
+    "@tensorflow/tfjs": "^3.18.0",
+    "core-js": "^3.22.7"
+  }
+}
