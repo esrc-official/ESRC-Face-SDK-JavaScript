@@ -66,7 +66,7 @@ $ npm install @esrc/face (request to npm server)
 
 Install via `Npm` and import like below in your `JavaScript` file.
 
-```bash
+```javascript
 // Define a global variable 'Module' with a method 'onLoadedESRC'
 Module = {
     onLoadedESRC() {
@@ -93,8 +93,10 @@ Initialization binds the ESRC Face SDK to JavaScript, thereby allowing it to use
 
 ```javascript
 // Initialize ESRC
-ESRC.initWithApplicationId("APP_ID", () => {
-    // do somthing...
+ESRC.initWithApplicationId("APP_ID", (isValid) => {
+    if (isValid) {
+        // Application ID is valid, so do somthing...
+    } 
 });
 ```
 
@@ -158,7 +160,7 @@ ESRC.stop()
 
 ## Changelogs
 
-### v0.0.7 (JUNE 02, 2022)
+### v0.1.0 (JUNE 02, 2022)
 
 If you want to check the record of other versions, go to [Change Log](https://github.com/esrc-official/ESRC-Face-SDK-JavaScript/blob/master/CHANGELOG.md).
 
