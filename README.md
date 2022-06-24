@@ -16,7 +16,7 @@
 
 Through our **ESRC Face SDK** for JavaScript, you can efficiently integrate real-time recognition of facial expression into your web app. This and other pages in the Getting Started provide the ESRC Face SDK’s structure and installation steps, then goes through the preliminary steps of implementing the ESRC Face SDK in your own project.
 
-### Supported browsers
+<!-- ### Supported browsers
 
 | Browser|Supported versions|
 | :---: | :--- |
@@ -27,7 +27,7 @@ Through our **ESRC Face SDK** for JavaScript, you can efficiently integrate real
 | Safari | 7 or higher |
 | Opera | 12.1 or higher |
 | iOS Safari | 7 or higher |
-| Android Browser | 4.4 (Kitkat) or higher | 
+| Android Browser | 4.4 (Kitkat) or higher |  -->
 
 ### Key functions
 
@@ -50,7 +50,7 @@ Our sample app has the core features of the ESRC Face SDK. Download the app from
 
 ## Install ESRC Face SDK
 
-This page provides a step-by-step guide that demonstrates how to build and configure an in-app bio-analysis using the ESRC Face SDK.
+This page provides a step-by-step guide that demonstrates how to build and configure an in-app face analysis using the ESRC Face SDK.
 
 ### Step 1: Download and install the ESRC Face SDK
 
@@ -85,7 +85,7 @@ Download the `assets` file from our [GitHub repository](https://github.com/esrc-
 
 The ESRC Face SDK simplifies vision features into an effortless and straightforward process. To recognize your facial expression, do the following steps:
 
-This page provides a step-by-step guide that demonstrates how to build and configure an in-app face-analysis using ESRC Face SDK. License key can be received by requesting by the email: **esrc@esrc.co.kr**.
+This page provides a step-by-step guide that demonstrates how to build and configure an in-app face analysis using ESRC Face SDK. License key can be received by requesting by the email: **esrc@esrc.co.kr**.
 
 ### Step 1: Initialize the ESRC Face SDK
 
@@ -104,7 +104,7 @@ ESRC.initWithApplicationId("APP_ID", (isValid) => {
 
 ### Step 2: Start the ESRC Face SDK
 
-Start the ESRC Face SDK to recognize your facial expression. To the `start()` method, pass the `ESRCProperty` to select analysis modules and the `ESRCHandler` to handle the results. You should implement the callback method of `ESRCHandler` interface. So, you can receive the results of face, facial landmark, facial action unit, and facial expression. Please refer to **[sample app](https://github.com/esrc-official/ESRC-Face-JavaScript)**.
+Start the ESRC Face SDK to recognize your facial expression. To the `start()` method, pass the `ESRCProperty` to select analysis modules and the `ESRCHandler` to handle the results. You should implement the callback method of `ESRCHandler` interface. So, you can receive the results of face, facial landmark, facial action unit and facial expression. Please refer to **[sample app](https://github.com/esrc-official/ESRC-Face-JavaScript)**.
 
 ```javascript
 // Initialize property
@@ -143,7 +143,7 @@ ESRC.start(property, handler);
 
 ### Step 3: Feed the ESRC Face SDK
 
-Feed `ESRCType.ESRCMat` on the ESRC Face SDK. To the `feed()` method, pass the `ESRCType.ESRCMat` image received using a camera in real-time. Please do it at 10 fps.
+Feed `ESRCType.ESRCMat` on the ESRC Face SDK. To the `feed()` method, pass the `ESRCType.ESRCMat` image received using a camera in real-time. Please do it at 10 fps or higher.
 
 ```javascript
 ESRC.feed(ESRCMat);
@@ -160,7 +160,7 @@ ESRC.stop()
 
 ## Changelogs
 
-### v0.1.1 (JUNE 07, 2022)
+### v0.1.2 (JUNE 24, 2022)
 
 If you want to check the record of other versions, go to [Change Log](https://github.com/esrc-official/ESRC-Face-SDK-JavaScript/blob/master/CHANGELOG.md).
 

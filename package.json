@@ -1,19 +1,19 @@
 {
   "name": "@esrc/face",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "ESRC Face JavaScript SDK",
   "main": "./dist/esrc.js",
   "scripts": {
     "dev": "./node_modules/.bin/webpack --mode=development",
-    "build": "./node_modules/.bin/webpack --mode=production",
-    "start": "node app.js"
+    "build": "./node_modules/.bin/webpack --mode=production"
   },
   "devDependencies": {
     "@babel/cli": "^7.17.10",
     "@babel/core": "^7.18.0",
+    "@babel/plugin-transform-runtime": "^7.18.2",
     "@babel/preset-env": "^7.18.0",
+    "@babel/runtime-corejs3": "^7.18.3",
     "babel-loader": "^8.2.5",
-    "express": "^4.18.1",
     "webpack": "^5.72.1",
     "webpack-cli": "^4.9.2"
   },
