@@ -1,0 +1,1930 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: ESRCType.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: ESRCType.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/**
+ * Represent types of ESRC.
+ * @module ESRCType
+ * @author Hyunwoo Lee &lt;lhw4846@esrc.co.kr>
+ * @license Copyright (c) 2022 Emotion Science Research Center all rights reserved.
+ */
+
+/**
+ * Represents a floating point in 2d-space.
+ */
+class ESRCPoint2f {
+    /**
+     * @property {number} x X position.
+     */
+    x;
+    /**
+     * @property {number} y Y position.
+     */
+    y;
+
+    /**
+     * ESRCPoint2f constructor.
+     * @param {number} x X position.
+     * @param {number} y Y position.
+     */
+    constructor(x, y) {
+        this.x = x ?? 0;
+        this.y = y ?? 0;
+    }
+
+    /**
+     * Returns X position.
+     * @returns {number} X position.
+     */
+    getX() {
+        return this.x;
+    }
+
+    /**
+     * Returns Y position.
+     * @returns {number} Y position.
+     */
+    getY() {
+        return this.y;
+    }
+
+    /**
+     * Sets X position.
+     * @param {number} x X position.
+     */
+    setX(x) {
+        this.x = x;
+    }
+
+    /**
+     * Sets Y position.
+     * @param {number} y Y position.
+     */
+    setY(y) {
+        this.y = y;
+    }
+
+    /**
+     * Sets ESRCPoint2f.
+     * @param {ESRCPoint2f} other ESRCPoint2f instance.
+     */
+    setPoint(other) {
+        this.x = other.x;
+        this.y = other.y;
+    }
+
+    /**
+     * Returns string following JSON structure.
+     * @returns {string} JSON string.
+     */
+    toString() {
+        const str = JSON.stringify({
+            x: this.x,
+            y: this.y
+        });
+        
+        return str;
+    }
+}
+
+/**
+ * Represents image structure.
+ */
+class ESRCMat {
+    /**
+     * @property {number} id Identification.
+     */
+    id;
+    /**
+     * @property {cv.Mat} frame Frame data.
+     */
+    frame;
+
+    /**
+     * ESRCMat constructor.
+     * @param {number} id Identification.
+     * @param {cv.Mat} frame Frame data.
+     */
+    constructor(frame, id) {
+        this.id = id ?? -1;
+        this.frame = frame ?? undefined;
+    }
+
+    /**
+     * Returns identification.
+     * @returns {number} Identification.
+     */
+    getId() {
+        return this.id;
+    }
+
+    /**
+     * Returns frame data.
+     * @returns {cv.Mat|undefined} Frame data.
+     */
+    getFrame() {
+        return this.frame;
+    }
+
+    /**
+     * Sets identification.
+     * @param {number} id Identification.
+     */
+    setId(id) {
+        this.id = id;
+    }
+
+    /**
+     * Sets frame data.
+     * @param {cv.Mat} frame Frame data.
+     */
+    setFrame(frame) {
+        this.frame = frame;
+    }
+
+    /**
+     * Sets ESRCMat.
+     * @param {ESRCMat} other ESRCMat instance.
+     */
+    setMat(other) {
+        this.id = other.id;
+        this.frame = other.frame;
+    }
+
+    /**
+     * Releases frame data.
+     */
+    release() {
+        this.id = -1;
+        this.frame = undefined;
+    }
+
+    /**
+     * Returns string following JSON structure.
+     * @returns {string} JSON string.
+     */
+    toString() {
+        const str = JSON.stringify({
+            id: this.id,
+            frame: this.frame
+        });
+
+        return str;
+    }
+}
+
+/**
+ * Represents measurement environment structure.
+ */
+class ESRCMeasureEnv {
+    /**
+     * @constant 
+     * @type {number}
+     * @description Constant for unmeasured brightness.
+     * @static
+     */
+    static MEASURE_ENV_BRIGHTNESS_NONE = -1;
+    /**
+     * @constant 
+     * @type {number}
+     * @description Constant for high brightness.
+     * @static
+     */
+    static MEASURE_ENV_BRIGHTNESS_HIGH = 0;
+    /**
+     * @constant 
+     * @type {number}
+     * @description Constant for normal brightness.
+     * @static
+     */
+    static MEASURE_ENV_BRIGHTNESS_NORMAL = 1;
+    /**
+     * @constant 
+     * @type {number}
+     * @description Constant for low brightness.
+     * @static
+     */
+    static MEASURE_ENV_BRIGHTNESS_LOW = 2;
+
+    /**
+     * @property {number} id Identification.
+     */
+    id;
+    /**
+     * @property {number} brightness Brightenss.
+     */
+    brightness;
+
+    /**
+     * ESRCMeasure constructor.
+     * @param {number} id Identification.
+     * @param {number} brightness Brightness.
+     */
+    constructor(id, brightness) {
+        this.id = id ?? -1;
+        this.brightness = brightness ?? ESRCMeasureEnv.MEASURE_ENV_BRIGHTNESS_NONE;
+    }
+
+    /**
+     * Returns identification.
+     * @returns {number} Identification.
+     */
+    getId() {
+        return this.id;
+    }
+
+    /**
+     * Returns brightness.
+     * @returns {number} Brightness.
+     */
+    getBrightness() {
+        return this.brightness;
+    }
+    
+    /**
+     * Sets identification.
+     * @param {number} id Identification.
+     */
+    setId(id) {
+        this.id = id;
+    }
+
+    /**
+     * Sets brightness.
+     * @param {number} brightness Brightness.
+     */
+    setBrightness(brightness) {
+        this.brightness = brightness;
+    }
+
+    /**
+     * Sets ESRCMeasureEnv.
+     * @param {ESRCMeasureEnv} other ESRCMeasureEnv instance.
+     */
+    setMeasureEnv(other) {
+        this.id = other.id;
+        this.brightness = other.brightness;
+    }
+
+    /**
+     * Returns string following JSON structure.
+     * @returns {string} JSON string.
+     */
+    toString() {
+        const str = JSON.stringify({
+            id: this.id,
+            brightness: this.brightness
+        });
+
+        return str;
+    }
+}
+
+/**
+ * Represents face structure.
+ */
+class ESRCFace {
+    /**
+     * @property {number} id Identnfication.
+     */
+    id;
+    /**
+     * @property {boolean} isDetect Whether face is detected or not.
+     */
+    isDetect;
+    /**
+     * @property {number} x Left-top X position of face.
+     */
+    x;
+    /**
+     * @property {number} y Left-top Y position of face.
+     */
+    y;
+    /**
+     * @property {number} w Width of face
+     */
+    w;
+    /**
+     * @property {number} h Height of face.
+     */
+    h;
+    /**
+     * @property {number} conf Confidence level.
+     */
+    conf;
+
+    /**
+     * ESRCFace constructor.
+     * @param {number} id Identification.
+     * @param {boolean} isDetect Whether face is detected or not.
+     * @param {number} x Left-top X position of face.
+     * @param {number} y Left-top Y position of face.
+     * @param {number} w Width of face.
+     * @param {number} h Height of face.
+     * @param {number} conf Confidence level.
+     */
+    constructor(id, isDetect, x, y, w, h, conf) {
+        this.id = id ?? -1;
+        this.isDetect = isDetect ?? false;
+        this.x = x ?? 0;
+        this.y = y ?? 0;
+        this.w = w ?? 0;
+        this.h = h ?? 0;
+        this.conf = conf ?? 0;
+    }
+
+    /**
+     * Returns identification.
+     * @returns {number} Identification.
+     */
+    getId() {
+        return this.id;
+    }
+
+    /**
+     * Returns whether face is detected or not.
+     * @returns {boolean} Whether face is detected or not.
+     */
+    getIsDetect() {
+        return this.isDetect;
+    }
+
+    /**
+     * Returns left-top X position of face.
+     * @returns {number} Left-top X position of face.
+     */
+    getX() {
+        return this.x;
+    }
+
+    /**
+     * Returns left-top Y position of face.
+     * @returns {number} Left-top Y position of face.
+     */
+    getY() {
+        return this.y;
+    }
+
+    /**
+     * Returns width of face.
+     * @returns {number} Width of face.
+     */
+    getW() {
+        return this.w;
+    }
+
+    /**
+     * Returns height of face.
+     * @returns {number} Height of face.
+     */
+    getH() {
+        return this.h;
+    }
+
+    /**
+     * Returns confidence level.
+     * @returns {number} Confidence level.
+     */
+    getConf() {
+        return this.conf;
+    }
+
+    /**
+     * Sets identification.
+     * @param {number} id Identification.
+     */
+    setId(id) {
+        this.id = id;
+    }
+
+    /**
+     * Sets whether face is detected or not.
+     * @param {boolean} isDetect Whether face is detected or not.
+     */
+    setIsDetect(isDetect) {
+        this.isDetect = isDetect;
+    }
+    
+    /**
+     * Sets left-top X position of face.
+     * @param {number} x Left-top X position of face.
+     */
+    setX(x) {
+        this.x = x;
+    }
+
+    /**
+     * Sets left-top Y position of face.
+     * @param {number} y Left-top Y position of face.
+     */
+    setY(y) {
+        this.y = y;
+    }
+
+    /**
+     * Sets width of face.
+     * @param {number} w Width of face.
+     */
+    setW(w) {
+        this.w = w;
+    }
+
+    /**
+     * Sets height of face.
+     * @param {number} h Height of face.
+     */
+    setH(h) {
+        this.h = h;
+    }
+
+    /**
+     * Sets confidence level.
+     * @param {number} conf Confidence level.
+     */
+    setConf(conf) {
+        this.conf = conf;
+    }
+
+    /**
+     * Sets ESRCFace.
+     * @param {ESRCFace} other ESRCFace instance.
+     */
+    setFace(other) {
+        this.id = other.id;
+        this.isDetect = other.isDetect;
+        this.x = other.x;
+        this.y = other.y;
+        this.w = other.w;
+        this.h = other.h;
+        this.conf = other.conf;
+    }
+
+    /**
+     * Returns string of result of detection.
+     * @returns {string} String of result of detection.
+     */
+    getDetectStr() {
+        let detectStr = "NONE";
+
+        if (this.isDetect) {
+            detectStr = "DETECT";
+        } else {
+            detectStr = "NOT DETECT";
+        }
+        
+        return detectStr;
+    }
+
+    /**
+     * Returns string following JSON structure.
+     * @returns {string} JSON string.
+     */
+    toString() {
+        const str = JSON.stringify({
+            id: this.id,
+            isDetect: this.isDetect,
+            x: this.x,
+            y: this.y,
+            w: this.w,
+            h: this.h,
+            conf: this.conf
+        });
+        
+        return str;
+    }
+}
+
+/**
+ * Represents facial landmark structure in 2d-space.
+ */
+class ESRCFacialLandmark {
+    /**
+     * @constant 
+     * @type {number}
+     * @description Constant for count of facial landmarks.
+     * @static
+     */
+    static FACIAL_LANDMARK_COUNT = 68;
+
+    /**
+     * @property {number} id Identification.
+     */
+    id;
+    /**
+     * @property {Array.&lt;number>} x X positions.
+     */
+    x;
+    /**
+     * @property {Array.&lt;number>} y Y positions.
+     */
+    y;
+    
+    /**
+     * ESRCFacialLandmark constructor.
+     * @param {number} id Identification.
+     * @param {Array.&lt;number>} x X positions.
+     * @param {Array.&lt;number>} y Y positions.
+     */
+    constructor(id, x, y) {
+        this.id = id ?? -1;
+        this.x = x ?? new Array(ESRCFacialLandmark.FACIAL_LANDMARK_COUNT);
+        this.y = y ?? new Array(ESRCFacialLandmark.FACIAL_LANDMARK_COUNT);
+    }
+
+    /**
+     * Returns identification.
+     * @returns {number} Identification.
+     */
+    getId() {
+        return this.id;
+    }
+
+    /**
+     * Return X positions of facial landmarks.
+     * @returns {Array.&lt;number>} X positions of facial landmarks.
+     */
+    getXPositions() {
+        return this.x;
+    }
+
+    /**
+     * Returns X position of facial landmark[index].
+     * @param {number} index Index of facial landmark.
+     * @returns {number} X position of facial landmark[index].
+     */
+    getXPosition(index) {
+        return this.x[index];
+    }
+
+    /**
+     * Return Y positions of facial landmarks.
+     * @returns {Array.&lt;number>} Y positions of facial landmarks.
+     */
+    getYPositions() {
+        return this.y;
+    }
+
+    /**
+     * Returns Y position of facial landmark[index].
+     * @param {number} index Index of facial landmark.
+     * @returns {number} Y position of facial landmark[index].
+     */
+    getYPosition(index) {
+        return this.y[index];
+    }
+
+    /**
+     * Sets identification.
+     * @param {number} id Identification.
+     */
+    setId(id) {
+        this.id = id;
+    }
+
+    /**
+     * Set X positions of facial landmarks.
+     * @param {Array.&lt;number>} x X positions of facial landmarks.
+     */
+    setXPositions(x) {
+        this.x = x;
+    }
+
+    /**
+     * Sets X position of facial landmark[index].
+     * @param {number} index Index of facial landmark.
+     * @param {number} x X position of facial landmark[index].
+     */
+    setXPosition(index, x) {
+        this.x[index] = x;
+    }
+
+    /**
+     * Set Y positions of facial landmarks.
+     * @param {Array.&lt;number>} y Y positions of facial landmarks.
+     */
+    setYPositions(y) {
+        this.y = y;
+    }
+
+    /**
+     * Sets Y position of facial landmark[index].
+     * @param {number} index Index of facial landmark.
+     * @param {number} y Y position of facial landmark[index].
+     */
+    setYPosition(index, y) {
+        this.y[index] = y;
+    }
+
+    /**
+     * Set positions of facial landmarks.
+     * @param {Array.&lt;number>} positions Positions of facial landmarks.
+     */
+    setPositions(positions) {
+        for (let i = 0; i &lt; ESRCFacialLandmark.FACIAL_LANDMARK_COUNT * 2; i++) {
+            if (i % 2 === 0) {
+                this.x[Math.floor(i / 2)] = positions[i];
+            } else {
+                this.y[Math.floor(i / 2)] = positions[i];
+            }
+        }
+    }
+
+    /**
+     * Sets ESRCFacialLandmark.
+     * @param {ESRCFacialLandmark} other ESRCFacialLandmark instance.
+     */
+    setFacialLandmark(other) {
+        this.id = other.id;
+        this.x = other.x;
+        this.y = other.y;
+    }
+
+    /**
+     * Returns string following JSON structure.
+     * @returns {string} JSON string.
+     */
+    toString() {
+        const str = JSON.stringify({
+            id: this.id,
+            x: this.x,
+            y: this.y
+        });
+        
+        return str;
+    }
+}
+
+/**
+ * Represents facial action unit structure.
+ */
+class ESRCFacialActionUnit {
+    /**
+     * @constant 
+     * @type {number}
+     * @description Constant for count of facial action unit.
+     * @static
+     */
+    static FACIAL_ACTION_UNIT_COUNT = 39;
+    /**
+     * @constant 
+     * @type {number}
+     * @description Constant for index of facial action unit 1 left.
+     * @static
+     */
+    static FACIAL_ACTION_UNIT_1_LEFT = 0;
+    /**
+     * @constant 
+     * @type {number}
+     * @description Constant for index of facial action unit 1 right.
+     * @static
+     */
+    static FACIAL_ACTION_UNIT_1_RIGHT = 1;
+    /**
+     * @constant 
+     * @type {number}
+     * @description Constant for index of facial action unit 2 left.
+     * @static
+     */
+    static FACIAL_ACTION_UNIT_2_LEFT = 2;
+    /**
+     * @constant 
+     * @type {number}
+     * @description Constant for index of facial action unit 2 right.
+     * @static
+     */
+    static FACIAL_ACTION_UNIT_2_RIGHT = 3;
+    /**
+     * @constant 
+     * @type {number}
+     * @description Constant for index of facial action unit 4 mid.
+     * @static
+     */
+    static FACIAL_ACTION_UNIT_4_MID = 4;
+    /**
+     * @constant 
+     * @type {number}
+     * @description Constant for index of facial action unit 5 left.
+     * @static
+     */
+    static FACIAL_ACTION_UNIT_5_LEFT = 5;
+    /**
+     * @constant 
+     * @type {number}
+     * @description Constant for index of facial action unit 5 right.
+     * @static
+     */
+    static FACIAL_ACTION_UNIT_5_RIGHT = 6;
+    /**
+     * @constant 
+     * @type {number}
+     * @description Constant for index of facial action unit 6 left.
+     * @static
+     */
+    static FACIAL_ACTION_UNIT_6_LEFT = 7;
+    /**
+     * @constant 
+     * @type {number}
+     * @description Constant for index of facial action unit 6 right.
+     * @static
+     */
+    static FACIAL_ACTION_UNIT_6_RIGHT = 8;
+    /**
+     * @constant 
+     * @type {number}
+     * @description Constant for index of facial action unit 7 left.
+     * @static
+     */
+    static FACIAL_ACTION_UNIT_7_LEFT = 9;
+    /**
+     * @constant 
+     * @type {number}
+     * @description Constant for index of facial action unit 7 right.
+     * @static
+     */
+    static FACIAL_ACTION_UNIT_7_RIGHT = 10;
+    /**
+     * @constant 
+     * @type {number}
+     * @description Constant for index of facial action unit 9 left.
+     * @static
+     */
+    static FACIAL_ACTION_UNIT_9_LEFT = 11;
+    /**
+     * @constant 
+     * @type {number}
+     * @description Constant for index of facial action unit 9 right.
+     * @static
+     */
+    static FACIAL_ACTION_UNIT_9_RIGHT = 12;
+    /**
+     * @constant 
+     * @type {number}
+     * @description Constant for index of facial action unit 10 mid.
+     * @static
+     */
+    static FACIAL_ACTION_UNIT_10_MID = 13;
+    /**
+     * @constant 
+     * @type {number}
+     * @description Constant for index of facial action unit 11 mid.
+     * @static
+     */
+    static FACIAL_ACTION_UNIT_11_MID = 14;
+    /**
+     * @constant 
+     * @type {number}
+     * @description Constant for index of facial action unit 12 left.
+     * @static
+     */
+    static FACIAL_ACTION_UNIT_12_LEFT = 15;
+    /**
+     * @constant 
+     * @type {number}
+     * @description Constant for index of facial action unit 12 right.
+     * @static
+     */
+    static FACIAL_ACTION_UNIT_12_RIGHT = 16;
+    /**
+     * @constant 
+     * @type {number}
+     * @description Constant for index of facial action unit 14 left.
+     * @static
+     */
+    static FACIAL_ACTION_UNIT_14_LEFT = 17;
+    /**
+     * @constant 
+     * @type {number}
+     * @description Constant for index of facial action unit 14 right.
+     * @static
+     */
+    static FACIAL_ACTION_UNIT_14_RIGHT = 18;
+    /**
+     * @constant 
+     * @type {number}
+     * @description Constant for index of facial action unit 15 left.
+     * @static
+     */
+    static FACIAL_ACTION_UNIT_15_LEFT = 19;
+    /**
+     * @constant 
+     * @type {number}
+     * @description Constant for index of facial action unit 15 right.
+     * @static
+     */
+    static FACIAL_ACTION_UNIT_15_RIGHT = 20;
+    /**
+     * @constant 
+     * @type {number}
+     * @description Constant for index of facial action unit 16 mid.
+     * @static
+     */
+    static FACIAL_ACTION_UNIT_16_MID = 21;
+    /**
+     * @constant 
+     * @type {number}
+     * @description Constant for index of facial action unit 18 mid.
+     * @static
+     */
+    static FACIAL_ACTION_UNIT_18_MID = 22;
+    /**
+     * @constant 
+     * @type {number}
+     * @description Constant for index of facial action unit 20 left.
+     * @static
+     */
+    static FACIAL_ACTION_UNIT_20_LEFT = 23;
+    /**
+     * @constant 
+     * @type {number}
+     * @description Constant for index of facial action unit 20 right.
+     * @static
+     */
+    static FACIAL_ACTION_UNIT_20_RIGHT = 24;
+    /**
+     * @constant 
+     * @type {number}
+     * @description Constant for index of facial action unit 21 mid.
+     * @static
+     */
+    static FACIAL_ACTION_UNIT_21_MID = 25;
+    /**
+     * @constant 
+     * @type {number}
+     * @description Constant for index of facial action unit 22 mid.
+     * @static
+     */
+    static FACIAL_ACTION_UNIT_22_MID = 26;
+    /**
+     * @constant 
+     * @type {number}
+     * @description Constant for index of facial action unit 25 mid.
+     * @static
+     */
+    static FACIAL_ACTION_UNIT_25_MID = 27;
+    /**
+     * @constant 
+     * @type {number}
+     * @description Constant for index of facial action unit 26 mid.
+     * @static
+     */
+    static FACIAL_ACTION_UNIT_26_MID = 28;
+    /**
+     * @constant 
+     * @type {number}
+     * @description Constant for index of facial action unit 27 mid.
+     * @static
+     */
+    static FACIAL_ACTION_UNIT_27_MID = 29;
+    /**
+     * @constant 
+     * @type {number}
+     * @description Constant for index of facial action unit 28 mid.
+     * @static
+     */
+    static FACIAL_ACTION_UNIT_28_MID = 30;
+    /**
+     * @constant 
+     * @type {number}
+     * @description Constant for index of facial action unit 29 mid.
+     * @static
+     */
+    static FACIAL_ACTION_UNIT_29_MID = 31;
+    /**
+     * @constant 
+     * @type {number}
+     * @description Constant for index of facial action unit 30 mid.
+     * @static
+     */
+    static FACIAL_ACTION_UNIT_30_MID = 32;
+    /**
+     * @constant 
+     * @type {number}
+     * @description Constant for index of facial action unit 35 left.
+     * @static
+     */
+    static FACIAL_ACTION_UNIT_35_LEFT = 33;
+    /**
+     * @constant 
+     * @type {number}
+     * @description Constant for index of facial action unit 35 right.
+     * @static
+     */
+    static FACIAL_ACTION_UNIT_35_RIGHT = 34;
+    /**
+     * @constant 
+     * @type {number}
+     * @description Constant for index of facial action unit 38 left.
+     * @static
+     */
+    static FACIAL_ACTION_UNIT_38_LEFT = 35;
+    /**
+     * @constant 
+     * @type {number}
+     * @description Constant for index of facial action unit 38 right.
+     * @static
+     */
+    static FACIAL_ACTION_UNIT_38_RIGHT = 36;
+    /**
+     * @constant 
+     * @type {number}
+     * @description Constant for index of facial action unit 43 left.
+     * @static
+     */
+    static FACIAL_ACTION_UNIT_43_LEFT = 37;
+    /**
+     * @constant 
+     * @type {number}
+     * @description Constant for index of facial action unit 43 right.
+     * @static
+     */
+    static FACIAL_ACTION_UNIT_43_RIGHT = 38;
+
+    /**
+     * @property {number} Identification.
+     */
+    id;
+    /**
+     * @property {Array.&lt;ESRCPoint2f>} Centroid list.
+     */
+    centroid;
+    /**
+     * @property {Array.&lt;number>} Area list.
+     */
+    area;
+
+    /**
+     * ESRCFacialActionUnit constructor.
+     * @param {number} id Identification.
+     * @param {Array.&lt;ESRCPoint2f>} centroid Centroid list.
+     * @param {Array.&lt;number>} area Area list.
+     */
+    constructor(id, centroid, area) {
+        this.id = id ?? -1;
+        this.centroid = centroid ?? new Array(ESRCFacialActionUnit.FACIAL_ACTION_UNIT_COUNT);
+        this.area = area ?? new Array(ESRCFacialActionUnit.FACIAL_ACTION_UNIT_COUNT);
+    }
+
+    /**
+     * Returns identification.
+     * @returns {number} Identification.
+     */
+    getId() {
+        return this.id;
+    }
+
+    /**
+     * Return centroids of facial action units.
+     * @returns {Array.&lt;ESRCPoint2f>}Centroids of facial action units.
+     */
+    getCentroids() {
+        return this.centroid;
+    }
+
+    /**
+     * Returns centroid of facial action unit[index].
+     * @param {number} index Index of facial action unit.
+     * @returns {ESRCPoint2f} Centroid of facial action unit[index].
+     */
+    getCentroid(index) {
+        return this.centroid[index];
+    }
+
+    /**
+     * Return areas of facial action units.
+     * @returns {Array.&lt;number>} Areas of facial action units.
+     */
+    getAreas() {
+        return this.area;
+    }
+
+    /**
+     * Returns area of facial action unit[index].
+     * @param {number} index Index of facial action unit.
+     * @returns {number} Area of facial action unit[index].
+     */
+    getArea(index) {
+        return this.area[index];
+    }
+
+    /**
+     * Sets identification.
+     * @param {number} id Identification.
+     */
+    setId(id) {
+        this.id = id;
+    }
+
+    /**
+     * Set centroids of facial action units.
+     * @param {Array.&lt;ESRCPoint2f>}centroid Centroids of facial action units.
+     */
+    setCentroids(centroid) {
+        this.centroid = centroid;
+    }
+
+    /**
+     * Sets centroid of facial action unit[index].
+     * @param {number} index Index of facial acion unit.
+     * @param {ESRCPoint2f} centroid Centroid of facial action unit[index].
+     */
+    setCentroid(index, centroid) {
+        this.centroid[index] = centroid;
+    }
+
+    /**
+     * Set areas of facial action units.
+     * @param {Array.&lt;number>} area Areas of facial action units.
+     */
+    setAreas(area) {
+        this.area = area;
+    }
+
+    /**
+     * Sets area of facial action unit[index].
+     * @param {number} index Index of facial acion unit.
+     * @param {number} area Area of facial action unit[index].
+     */
+    setArea(index, area) {
+        this.area[index] = area;
+    }
+
+    /**
+     * Sets FacialActionUnit instance.
+     * @param {ESRCFacialActionUnit } other ESRCFacialActionUnit instance.
+     */
+    setFacialActionUnit(other) {
+        this.id = other.id;
+        this.centroid = other.centroid;
+        this.area = other.area;
+    }
+
+    /**
+     * Returns string following JSON structure.
+     * @returns {string} JSON string.
+     */
+    toString() {
+        const str = JSON.stringify({
+            id: this.id,
+            centroid: this.centroid,
+            area: this.area
+        });
+        
+        return str;
+    }
+}
+
+/**
+ * Represents basic facial expression structure.
+ */
+class ESRCBasicFacialExpression {
+    /**
+     * @constant 
+     * @type {number}
+     * @description Constant for count of basic facial expressions.
+     * @static
+     */
+    static FACIAL_EXPRESSION_COUNT = 7;
+    /**
+     * @constant 
+     * @type {number}
+     * @description Constant for unrecognized facial expression.
+     * @static
+     */
+    static FACIAL_EXPRESSION_NONE = -1;
+    /**
+     * @constant 
+     * @type {number}
+     * @description Constant for index of anger.
+     * @static
+     */
+    static FACIAL_EXPRESSION_ANGER = 0;
+    /**
+     * @constant 
+     * @type {number}
+     * @description Constant for index of disgust.
+     * @static
+     */
+    static FACIAL_EXPRESSION_DISGUST = 1;
+    /**
+     * @constant 
+     * @type {number}
+     * @description Constant for index of fear.
+     * @static
+     */
+    static FACIAL_EXPRESSION_FEAR = 2;
+    /**
+     * @constant 
+     * @type {number}
+     * @description Constant for index of happiness.
+     * @static
+     */
+    static FACIAL_EXPRESSION_HAPPY = 3;
+    /**
+     * @constant 
+     * @type {number}
+     * @description Constant for index of sadness.
+     * @static
+     */
+    static FACIAL_EXPRESSION_SAD = 4;
+    /**
+     * @constant 
+     * @type {number}
+     * @description Constant for index of surprise.
+     * @static
+     */
+    static FACIAL_EXPRESSION_SURPRISE = 5;
+    /**
+     * @constant 
+     * @type {number}
+     * @description Constant for index of neutral.
+     * @static
+     */
+    static FACIAL_EXPRESSION_NEUTRAL = 6;
+
+    /**
+     * @property {number} id Identification.
+     */
+    id;
+    /**
+     * @property {Array.&lt;number>} emotionProbs Probabilities of basic facial epxression.
+     */
+    emotionProbs;
+    /**
+     * @property {number} emotion Basic facial expression.
+     */
+    emotion;
+
+    /**
+     * ESRCBasicFacialExpression constructor.
+     * @param {number} id Identification.
+     * @param {Array.&lt;number>} emotionProbs Probabilities of basic facial epxression.
+     * @param {number} emotion Basic facial epxression.
+     */
+    constructor(id, emotionProbs, emotion) {
+        this.id = id ?? -1;
+        this.emotionProbs = emotionProbs ?? new Array(ESRCBasicFacialExpression.FACIAL_EXPRESSION_COUNT);
+        this.emotion = emotion ?? ESRCBasicFacialExpression.FACIAL_EXPRESSION_COUNT;
+    }
+
+    /**
+     * Returns identification.
+     * @returns {number} Identification.
+     */
+    getId() {
+        return this.id;
+    }
+
+    /**
+     * Return probabilities of basic facial expressions.
+     * @returns {Array.&lt;number>} Probabilities of basic facial expressions.
+     */
+    getEmotionProbs() {
+        return this.emotionProbs;
+    }
+
+    /**
+     * Returns probability of basic facial expression[index].
+     * @param {number} index Index of basic facial expression.
+     * @returns {number} Probability of basic facial expression[index].
+     */
+    getEmotionProb(index) {
+        return this.emotionProbs[index];
+    }
+
+    /**
+     * Returns basic facial expression.
+     * @returns {number} Basic facial expression.
+     */
+    getEmotion() {
+        return this.emotion;
+    }
+
+    /**
+     * Sets identification.
+     * @param {number} id Identification.
+     */
+    setId(id) {
+        this.id = id;
+    }
+
+    /**
+     * Set probabilities of basic facial expressions.
+     * @param {Array.&lt;number>} emotionProbs Probabilities of basic facial expressions.
+     */
+    setEmotionProbs(emotionProbs) {
+        this.emotionProbs = emotionProbs;
+    }
+
+    /**
+     * Sets probability of basic facial expression[index].
+     * @param {number} index Index of basic facial expression.
+     * @param {number} emotionProb Probability of basic facial expression[index].
+     */
+    setEmotionProb(index, emotionProb) {
+        this.emotionProbs[index] = emotionProb;
+    }
+
+    /**
+     * Sets basic facial epxression.
+     * @param {number} emotion Basic facial expression.
+     */
+    setEmotion(emotion) {
+        this.emotion = emotion;
+    }
+
+    /**
+     * Sets ESRCBasicFacialExpression.
+     * @param {ESRCBasicFacialExpression} other ESRCBasicFacialExpression instance.
+     */
+    setBasicFacialExpression(other) {
+        this.id = other.id;
+        this.emotionProbs = other.emotionProbs;
+        this.emotion = other.emotion;
+    }
+
+    /**
+     * Returns string of emotion.
+     * @returns {string} String of emotion.
+     */
+    getEmotionStr() {
+        let emotionStr = "NONE";
+
+        switch (this.emotion) {
+            case ESRCBasicFacialExpression.FACIAL_EXPRESSION_ANGER:
+                emotionStr = "ANGER";
+                break;
+            case ESRCBasicFacialExpression.FACIAL_EXPRESSION_FEAR:
+                emotionStr = "FEAR";
+                break;
+            case ESRCBasicFacialExpression.FACIAL_EXPRESSION_DISGUST:
+                emotionStr = "DISGUST";
+                break;
+            case ESRCBasicFacialExpression.FACIAL_EXPRESSION_NEUTRAL:
+                emotionStr = "NEUTRAL";
+                break;
+            case ESRCBasicFacialExpression.FACIAL_EXPRESSION_HAPPY:
+                emotionStr = "HAPPY";
+                break;
+            case ESRCBasicFacialExpression.FACIAL_EXPRESSION_SAD:
+                emotionStr = "SAD";
+                break;
+            case ESRCBasicFacialExpression.FACIAL_EXPRESSION_SURPRISE:
+                emotionStr = "SURPRISE";
+                break;
+            default:
+                emotionStr = "NONE";
+        }
+
+        return emotionStr;
+    }
+
+    /**
+     * Returns string following JSON structure.
+     * @returns {string} JSON string.
+     */
+    toString() {
+        const str = JSON.stringify({
+            id: this.id,
+            emotionProbs: this.emotionProbs,
+            emotion: this.emotion
+        });
+        
+        return str;
+    }
+}
+
+/**
+ * Represents valence facial expression structure.
+ */
+class ESRCValenceFacialExpression {
+    /**
+     * @constant 
+     * @type {number}
+     * @description Constant for count of valence facial expressions.
+     * @static
+     */
+    static FACIAL_EXPRESSION_COUNT = 3;
+    /**
+     * @constant 
+     * @type {number}
+     * @description Constant for unrecognized facial expression.
+     * @static
+     */
+    static FACIAL_EXPRESSION_NONE = -1;
+    /**
+     * @constant 
+     * @type {number}
+     * @description Constant for index of positive.
+     * @static
+     */
+    static FACIAL_EXPRESSION_POSITIVE = 0;
+    /**
+     * @constant 
+     * @type {number}
+     * @description Constant for index of negative.
+     * @static
+     */
+    static FACIAL_EXPRESSION_NEGATIVE = 1;
+    /**
+     * @constant 
+     * @type {number}
+     * @description Constant for index of neutral.
+     * @static
+     */
+    static FACIAL_EXPRESSION_NEUTRAL = 2;
+    
+    /**
+     * @property {number} id Identification.
+     */
+    id;
+    /**
+     * @property {Array.&lt;number>} emotionProbs Probabilities of valence facial epxression.
+     */
+    emotionProbs;
+    /**
+     * @property {number} emotion Valence facial expression.
+     */
+    emotion;
+
+    /**
+     * ESRCValenceFacialExpression constructor.
+     * @param {number} id Identification.
+     * @param {Array.&lt;number>} emotionProbs Probabilities of valence facial epxression.
+     * @param {number} emotion Valence facial epxression.
+     */
+    constructor(id, emotionProbs, emotion) {
+        this.id = id ?? -1;
+        this.emotionProbs = emotionProbs ?? new Array(ESRCValenceFacialExpression.FACIAL_EXPRESSION_COUNT);
+        this.emotion = emotion ?? ESRCValenceFacialExpression.FACIAL_EXPRESSION_COUNT;
+    }
+
+    /**
+     * Returns identification.
+     * @returns {number} Identification.
+     */
+    getId() {
+        return this.id;
+    }
+
+    /**
+     * Return probabilities of valence facial expressions.
+     * @returns {Array.&lt;number>} Probabilities of valence facial expressions.
+     */
+    getEmotionProbs() {
+        return this.emotionProbs;
+    }
+
+    /**
+     * Returns probability of valence facial expression[index].
+     * @param {number} index Index of valence facial expression.
+     * @returns {number} Probability of valence facial expression[index].
+     */
+    getEmotionProb(index) {
+        return this.emotionProbs[index];
+    }
+
+    /**
+     * Returns valence facial expression.
+     * @returns {number} Valence facial expression.
+     */
+    getEmotion() {
+        return this.emotion;
+    }
+
+    /**
+     * Sets identification.
+     * @param {number} id Identification.
+     */
+    setId(id) {
+        this.id = id;
+    }
+
+    /**
+     * Set probabilities of valence facial expressions.
+     * @param {Array.&lt;number>} emotionProbs Probabilities of valence facial expressions.
+     */
+    setEmotionProbs(emotionProbs) {
+        this.emotionProbs = emotionProbs;
+    }
+
+    /**
+     * Sets probability of valence facial expression[index].
+     * @param {number} index Index of valence facial expression.
+     * @param {number} emotionProb Probability of valence facial expression[index].
+     */
+    setEmotionProb(index, emotionProb) {
+        this.emotionProbs[index] = emotionProb;
+    }
+
+    /**
+     * Sets valence facial epxression.
+     * @param {number} emotion Valence facial expression.
+     */
+    setEmotion(emotion) {
+        this.emotion = emotion;
+    }
+
+    /**
+     * Sets ESRCValenceFacialExpression.
+     * @param {ESRCValenceFacialExpression} other ESRCValenceFacialExpression instance.
+     */
+    setValenceFacialExpression(other) {
+        this.id = other.id;
+        this.emotionProbs = other.emotionProbs;
+        this.emotion = other.emotion;
+    }
+
+    /**
+     * Returns string of emotion.
+     * @returns {string} String of emotion.
+     */
+    getEmotionStr() {
+        let emotionStr = "NONE";
+
+        switch (this.emotion) {
+            case ESRCValenceFacialExpression.FACIAL_EXPRESSION_POSITIVE:
+                emotionStr = "POSITIVE";
+                break;
+            case ESRCValenceFacialExpression.FACIAL_EXPRESSION_NEGATIVE:
+                emotionStr = "NEGATIVE";
+                break;
+            case ESRCValenceFacialExpression.FACIAL_EXPRESSION_NEUTRAL:
+                emotionStr = "NEUTRAL";
+                break;
+            default:
+                emotionStr = "NONE";
+        }
+
+        return emotionStr;
+    }
+
+    /**
+     * Returns string following JSON structure.
+     * @returns JSON string.
+     */
+    toString() {
+        const str = JSON.stringify({
+            id: this.id,
+            emotionProbs: this.emotionProbs,
+            emotion: this.emotion
+        });
+        
+        return str;
+    }
+}
+
+/**
+ * Represents head pose structure in 3d-space.
+ */
+class ESRCHeadPose {
+    /**
+     * @property {number} id Identification.
+     */
+    id;
+    /**
+     * @property {number} thetaX Angle of X axis.
+     */
+    thetaX;
+    /**
+     * @property {number} thetaY Angle of Y axis.
+     */
+    thetaY;
+    /**
+     * @property {number} thetaZ Angle of Z axis.
+     */
+    thetaZ;
+
+    /**
+     * ESRCHeadPose constructor.
+     * @param {number} id Identification.
+     * @param {number} thetaX Angle of X axis.
+     * @param {number} thetaY Angle of Y axis.
+     * @param {number} thetaZ Angle of Z axis.
+     */
+    constructor(id, thetaX, thetaY, thetaZ) {
+        this.id = id ?? -1;
+        this.thetaX = thetaX ?? 0;
+        this.thetaY = thetaY ?? 0;
+        this.thetaZ = thetaZ ?? 0;
+    }
+
+    /**
+     * Returns identification.
+     * @returns {number} Identification.
+     */
+    getId() {
+        return this.id;
+    }
+
+    /**
+     * Returns angle of X axis.
+     * @returns {number} Angle of X axis.
+     */
+    getThetaX() {
+        return this.thetaX;
+    }
+
+    /**
+     * Returns angle of Y axis.
+     * @returns {number} Angle of Y axis.
+     */
+    getThetaY() {
+        return this.thetaY;
+    }
+
+    /**
+     * Returns angle of Z axis.
+     * @returns {number} Angle of Z axis.
+     */
+    getThetaZ() {
+        return this.thetaZ;
+    }
+
+    /**
+     * Sets identification.
+     * @param {number} id Identification.
+     */
+    setId(id) {
+        this.id = id;
+    }
+
+    /**
+     * Sets angle of X axis.
+     * @param {number} thetaX Angle of X axis.
+     */
+    setThetaX(thetaX) {
+        this.thetaX = thetaX;
+    }
+
+    /**
+     * Sets angle of Y axis.
+     * @param {number} thetaY Angle of Y axis.
+     */
+    setThetaY(thetaY) {
+        this.thetaY = thetaY;
+    }
+
+    /**
+     * Sets angle of Z axis.
+     * @param {number} thetaZ Angle of Z axis.
+     */
+    setThetaZ(thetaZ) {
+        this.thetaZ = thetaZ;
+    }
+
+    /**
+     * Sets ESRCHeadPose.
+     * @param {ESRCHeadPose} other ESRCHeadPose instance.
+     */
+    setHeadPose(other) {
+        this.id = other.id;
+        this.thetaX = other.thetaX;
+        this.thetaY = other.thetaY;
+        this.thetaZ = other.thetaZ;
+    }
+
+    /**
+     * Returns string following JSON structure.
+     * @returns {string} JSON string.
+     */
+    toString() {
+        const str = JSON.stringify({
+            id: this.id,
+            thetaX: this.thetaX,
+            thetaY: this.thetaY,
+            thetaZ: this.thetaZ
+        });
+        
+        return str;
+    }
+}
+
+/**
+ * Represents attention structure.
+ */
+class ESRCAttention {
+    /**
+     * @property {number} id Identification.
+     */
+    id;
+    /**
+     * @property {boolean} isAttend Whether attend or not.
+     */
+    isAttend;
+
+    /**
+     * ESRCAttention constructor.
+     * @param {number} id Identification.
+     * @param {boolean} isAttend Whether attend or not.
+     */
+    constructor(id, isAttend) {
+        this.id = id ?? -1;
+        this.isAttend = isAttend ?? false;
+    }
+
+    /**
+     * Returns identification.
+     * @returns {number} Identification.
+     */
+    getId() {
+        return this.id;
+    }
+
+    /**
+     * Returns whether attend or not.
+     * @returns {boolean} Whether attend or not.
+     */
+    getIsAttend() {
+        return this.isAttend
+    }
+
+    /**
+     * Sets identification.
+     * @param {number} id Identification.
+     */
+    setId(id) {
+        this.id = id;
+    }
+
+    /**
+     * Sets whether attend or not.
+     * @param {boolean} isAttend Whether attend or not.
+     */
+    setIsAttend(isAttend) {
+        this.isAttend = isAttend;
+    }
+
+    /**
+     * Sets ESRCAttention.
+     * @param {ESRCAttention} other ESRCAttention instance.
+     */
+    setAttention(other) {
+        this.id = other.id;
+        this.isAttend = other.isAttend;
+    }
+
+    /**
+     * Returns string following JSON structure.
+     * @returns {string} JSON string.
+     */
+    toString() {
+        const str = JSON.stringify({
+            id: this.id,
+            isAttend: this.isAttend
+        });
+        
+        return str;
+    }
+}
+
+/**
+ * Represents property for initialization of ESRC.
+ */
+class ESRCProperty {
+    /**
+     * @property {boolean} enableMeasureEnv Whether analyze measurement environment or not.
+     */
+    enableMeasureEnv;
+    /**
+     * @property {boolean} enableFace Whether detect face or not.
+     */
+    enableFace;
+    /**
+     * @property {boolean} enableFacialLandmark Whether detect facial landmark or not. If enableFace is false, it is also automatically set to false.
+     */
+    enableFacialLandmark;
+    /**
+     * @property {boolean} enableFacialActionUnit Whether analyze facial action unit or not. If enableFace or enableFacialLandmark is false, it is also automatically set to false.
+     */
+    enableFacialActionUnit;
+    /**
+     * @property {boolean} enableBasicFacialExpression Whether recognize basic facial expression or not. If enableFace is false, it is also automatically set to false.
+     */
+    enableBasicFacialExpression;
+    /**
+     * @property {boolean} enableValenceFacialExpression Whether recognize valence facial expression or not. If enableFace is false, it is also automatically set to false.
+     */
+    enableValenceFacialExpression;
+    
+    /**
+     * ESRCProperty constructor.
+     * @param {boolean} enableMeasureEnv Whether analyze measurement environment or not.
+     * @param {boolean} enableFace Whether detect face or not.
+     * @param {boolean} enableFacialLandmark Whether detect facial landmark or not. If enableFace is false, it is also automatically set to false.
+     * @param {boolean} enableFacialActionUnit Whether analyze facial action unit or not. If enableFace or enableFacialLandmark is false, it is also automatically set to false.
+     * @param {boolean} enableBasicFacialExpression Whether recognize basic facial expression or not. If enableFace is false, it is also automatically set to false.
+     * @param {boolean} enableValenceFacialExpression Whether recognize valence facial expression or not. If enableFace is false, it is also automatically set to false.
+     */
+    constructor(enableMeasureEnv, enableFace, enableFacialLandmark,
+                enableFacialActionUnit, enableBasicFacialExpression, enableValenceFacialExpression) {
+        this.enableMeasureEnv = enableMeasureEnv ?? false;
+        this.enableFace = enableFace ?? false;
+        this.enableFacialLandmark = enableFacialLandmark ?? false;
+        this.enableFacialActionUnit = enableFacialActionUnit ?? false;
+        this.enableBasicFacialExpression = enableBasicFacialExpression ?? false;
+        this.enableValenceFacialExpression = enableValenceFacialExpression ?? false;
+        this.correct();
+    }
+
+    /**
+     * Correct enables with dependencies.
+     */
+    correct() {
+        // If enableFace is false
+        if (!this.enableFace) {
+            this.enableFacialLandmark = false;
+            this.enableFacialActionUnit = false;
+            this.enableBasicFacialExpression = false;
+            this.enableValenceFacialExpression = false;
+        }
+
+        // If enableFacialLandmark is false
+        if (!this.enableFacialLandmark) {
+            this.enableFacialActionUnit = false;
+        }
+    }
+
+    /**
+     * Returns whether analyze measurement environment or not.
+     * @returns {boolean} Whether analyze measurement environment or not.
+     */
+    getEnableMeasureEnv() {
+        return this.enableMeasureEnv
+    }
+    
+    /**
+     * Returns whether detect face or not.
+     * @returns {boolean} Whether detect face or not.
+     */
+    getEnableFace() {
+        return this.enableFace
+    }
+
+    /**
+     * Returns whether detect facial landmark or not. If enableFace is false, it is also automatically set to false.
+     * @returns {boolean} Whether detect facial landmark or not. If enableFace is false, it is also automatically set to false.
+     */
+    getEnableFacialLandmark() {
+        return this.enableFacialLandmark
+    }
+    
+    /**
+     * Returns whether analyze facial action unit or not. If enableFace or enableFacialLandmark is false, it is also automatically set to false.
+     * @returns {boolean} Whether analyze facial action unit or not. If enableFace or enableFacialLandmark is false, it is also automatically set to false.
+     */
+    getEnableFacialActionUnit() {
+        return this.enableFacialActionUnit
+    }
+    
+    /**
+     * Returns whether recognize basic facial expression or not. If enableFace is false, it is also automatically set to false.
+     * @returns {boolean} Whether recognize basic facial expression or not. If enableFace is false, it is also automatically set to false.
+     */
+    getEnableBasicFacialExpression() {
+        return this.enableBasicFacialExpression
+    }
+    
+    /**
+     * Returns whether recognize valence facial expression or not. If enableFace is false, it is also automatically set to false.
+     * @returns {boolean} Whether recognize valence facial expression or not. If enableFace is false, it is also automatically set to false.
+     */
+    getEnableValenceFacialExpression() {
+        return this.enableValenceFacialExpression
+    }
+    
+    /**
+     * Sets whether analyze measurement environment or not.
+     * @param {boolean} enableMeasureEnv Whether analyze measurement environment or not.
+     */
+    setEnableMeasureEnv(enableMeasureEnv) {
+        this.enableMeasureEnv = enableMeasureEnv
+    }
+    
+    /**
+     * Sets whether detect face or not.
+     * @param {boolean} enableFace Whether detect face or not.
+     */
+    setEnableFace(enableFace) {
+        this.enableFace = enableFace
+    }
+
+    /**
+     * Sets whether detect facial landmark or not. If enableFace is false, it is also automatically set to false.
+     * @param {boolean} enableFacialLandmark Whether detect facial landmark or not. If enableFace is false, it is also automatically set to false.
+     */
+    setEnableFacialLandmark(enableFacialLandmark) {
+        this.enableFacialLandmark = enableFacialLandmark
+    }
+    
+    /**
+     * Sets whether analyze facial action unit or not. If enableFace or enableFacialLandmark is false, it is also automatically set to false.
+     * @param {boolean} enableFacialActionUnit Whether analyze facial action unit or not. If enableFace or enableFacialLandmark is false, it is also automatically set to false.
+     */
+    setEnableFacialActionUnit(enableFacialActionUnit) {
+        this.enableFacialActionUnit = enableFacialActionUnit
+    }
+    
+    /**
+     * Sets whether recognize basic facial expression or not. If enableFace is false, it is also automatically set to false.
+     * @param {boolean} enableBasicFacialExpression Whether recognize basic facial expression or not. If enableFace is false, it is also automatically set to false.
+     */
+    setEnableBasicFacialExpression(enableBasicFacialExpression) {
+        this.enableBasicFacialExpression = enableBasicFacialExpression
+    }
+    
+    /**
+     * Sets whether recognize valence facial expression or not. If enableFace is false, it is also automatically set to false.
+     * @param {boolean} enableValenceFacialExpression Whether recognize valence facial expression or not. If enableFace is false, it is also automatically set to false.
+     */
+    setEnableValenceFacialExpression(enableValenceFacialExpression) {
+        this.enableValenceFacialExpression = enableValenceFacialExpression
+    }
+
+    /**
+     * Sets ESRCProperty.
+     * @param {ESRCProperty} other ESRCProperty instance.
+     */
+    setProperty(other) {
+        this.enableMeasureEnv = other.enableMeasureEnv;
+        this.enableFace = other.enableFace;
+        this.enableFacialLandmark = other.enableFacialLandmark;
+        this.enableFacialActionUnit = other.enableFacialActionUnit;
+        this.enableBasicFacialExpression = other.enableBasicFacialExpression;
+        this.enableValenceFacialExpression = other.enableValenceFacialExpression;
+    }
+
+    /**
+     * Returns string following JSON structure.
+     * @returns {string} JSON string.
+     */
+    toString() {
+        const str = JSON.stringify({
+            enableMeasureEnv: this.enableMeasureEnv,
+            enableFace: this.enableFace,
+            enableFacialLandmark: this.enableFacialLandmark,
+            enableFacialActionUnit: this.enableFacialActionUnit,
+            enableBasicFacialExpression: this.enableBasicFacialExpression,
+            enableValenceFacialExpression: this.enableValenceFacialExpression
+        });
+        
+        return str;
+    }
+}
+
+module.exports = {
+    ESRCPoint2f, 
+    ESRCMat, 
+    ESRCMeasureEnv,
+    ESRCFace, 
+    ESRCFacialLandmark,
+    ESRCFacialActionUnit, 
+    ESRCBasicFacialExpression, 
+    ESRCValenceFacialExpression,
+    ESRCProperty 
+};</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-ESRCType.html">ESRCType</a></li></ul><h3>Classes</h3><ul><li><a href="ESRC.html">ESRC</a></li><li><a href="ESRCHandler.html">ESRCHandler</a></li><li><a href="module-ESRCType-ESRCAttention.html">ESRCAttention</a></li><li><a href="module-ESRCType-ESRCBasicFacialExpression.html">ESRCBasicFacialExpression</a></li><li><a href="module-ESRCType-ESRCFace.html">ESRCFace</a></li><li><a href="module-ESRCType-ESRCFacialActionUnit.html">ESRCFacialActionUnit</a></li><li><a href="module-ESRCType-ESRCFacialLandmark.html">ESRCFacialLandmark</a></li><li><a href="module-ESRCType-ESRCHeadPose.html">ESRCHeadPose</a></li><li><a href="module-ESRCType-ESRCMat.html">ESRCMat</a></li><li><a href="module-ESRCType-ESRCMeasureEnv.html">ESRCMeasureEnv</a></li><li><a href="module-ESRCType-ESRCPoint2f.html">ESRCPoint2f</a></li><li><a href="module-ESRCType-ESRCProperty.html">ESRCProperty</a></li><li><a href="module-ESRCType-ESRCValenceFacialExpression.html">ESRCValenceFacialExpression</a></li></ul><h3><a href="global.html">Global</a></h3>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.10</a> on Tue Jun 28 2022 10:33:59 GMT+0900 (대한민국 표준시)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>
